@@ -27,7 +27,7 @@
         },
         "instance_type": "t2.small",
         "ssh_username": "ec2-user",
-        "ami_name": "{{user `org`}}/coordinator-v{{user `version`}}"
+        "ami_name": "{{user `org`}}/presto-coordinator-v{{user `version`}}"
     },{
         "name": "worker",
         "type": "amazon-ebs",
@@ -47,7 +47,7 @@
         },
         "instance_type": "r4.large",
         "ssh_username": "ec2-user",
-        "ami_name": "{{user `org`}}/worker-v{{user `version`}}",
+        "ami_name": "{{user `org`}}/presto-worker-v{{user `version`}}",
         "ami_block_device_mappings": [{
             "device_name": "/dev/sdb",
             "volume_type": "gp2",
