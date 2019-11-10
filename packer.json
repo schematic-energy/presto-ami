@@ -22,7 +22,7 @@
                 "name": "amzn2-ami-hvm-2.0.*-x86_64-gp2",
                 "root-device-type": "ebs"
             },
-            "owners": ["{{user `owner`}}"],
+            "owners": ["amazon"],
             "most_recent": true
         },
         "instance_type": "t2.small",
@@ -42,10 +42,10 @@
                 "name": "amzn2-ami-hvm-2.0.*-x86_64-gp2",
                 "root-device-type": "ebs"
             },
-            "owners": ["{{user `owner`}}"],
+            "owners": ["amazon"],
             "most_recent": true
         },
-        "instance_type": "r5.large",
+        "instance_type": "r4.large",
         "ssh_username": "ec2-user",
         "ami_name": "{{user `org`}}/worker-v{{user `version`}}",
         "ami_block_device_mappings": [{
