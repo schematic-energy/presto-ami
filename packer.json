@@ -1,0 +1,91 @@
+{
+    "variables": {
+        "version": null,
+        "org": "{{env `PRESTO_AMI_ORG`}}",
+        "owner": "{{env `PRESTO_AMI_OWNER`}}",
+        "accounts": "{{env `PRESTO_AMI_ACCOUNTS`}}",
+        "ami_regions": "{{env `PRESTO_AMI_REGIONS`}}",
+        "vpc_id": "{{env `PRESTO_AMI_VPC`}}",
+        "subnet_id": "{{env `PRESTO_AMI_SUBNET`}}"
+    },
+    "builders": [{
+        "name": "coordinator",
+        "type": "amazon-ebs",
+        "vpc_id": "{{user `vpc_id`}}",
+        "subnet_id": "{{user `subnet_id`}}",
+        "ami_users": "{{user `accounts`}}",
+        "ami_regions": "{{user `ami_regions`}}",
+        "associate_public_ip_address": true,
+        "source_ami_filter": {
+            "filters": {
+                "virtualization-type": "hvm",
+                "name": "amzn2-ami-hvm-2.0.*-x86_64-gp2",
+                "root-device-type": "ebs"
+            },
+            "owners": ["{{user `owner`}}"],
+            "most_recent": true
+        },
+        "instance_type": "t2.small",
+        "ssh_username": "ec2-user",
+        "ami_name": "{{user `org`}}/coordinator-v{{user `version`}}"
+    },{
+        "name": "worker",
+        "type": "amazon-ebs",
+        "vpc_id": "{{user `vpc_id`}}",
+        "subnet_id": "{{user `subnet_id`}}",
+        "ami_users": "{{user `accounts`}}",
+        "ami_regions": "{{user `ami_regions`}}",
+        "associate_public_ip_address": true,
+        "source_ami_filter": {
+            "filters": {
+                "virtualization-type": "hvm",
+                "name": "amzn2-ami-hvm-2.0.*-x86_64-gp2",
+                "root-device-type": "ebs"
+            },
+            "owners": ["{{user `owner`}}"],
+            "most_recent": true
+        },
+        "instance_type": "r5.large",
+        "ssh_username": "ec2-user",
+        "ami_name": "{{user `org`}}/worker-v{{user `version`}}",
+        "ami_block_device_mappings": [{
+            "device_name": "/dev/sdb",
+            "volume_type": "gp2",
+            "volume_size": "100",
+            "delete_on_termination": true
+        }]
+    }],
+    "provisioners": [{
+        "type": "file",
+        "source": "coordinator/hive-site.xml.template",
+        "destination": "coordinator/hive-site.xml.template",
+        "only": ["coordinator"]
+    },{
+        "type": "file",
+        "source": "coordinator/core-site.xml",
+        "destination": "coordinator/core-site.xml",
+        "only": ["coordinator"]
+    },{
+        "type": "shell",
+        "script": "coordinator/provision.sh",
+        "only": ["coordinator"]
+    },{
+        "type": "shell",
+        "script": "worker/provision.sh",
+        "only": ["worker"]
+    },{
+        "type": "file",
+        "source": "coordinator/run.sh",
+        "destination": "run.sh",
+        "only": ["coordinator"]
+    },{
+        "type": "file",
+        "source": "worker/run.sh",
+        "destination": "run.sh",
+        "only": ["worker"]
+    },{
+        "type": "file",
+        "source": "update-config.sh",
+        "destination": "update-config.sh"
+    }]
+}
