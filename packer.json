@@ -58,12 +58,12 @@
     "provisioners": [{
         "type": "file",
         "source": "coordinator/hive-site.xml.template",
-        "destination": "coordinator/hive-site.xml.template",
+        "destination": "hive-site.xml.template",
         "only": ["coordinator"]
     },{
         "type": "file",
         "source": "coordinator/core-site.xml",
-        "destination": "coordinator/core-site.xml",
+        "destination": "core-site.xml",
         "only": ["coordinator"]
     },{
         "type": "shell",
