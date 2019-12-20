@@ -39,5 +39,3 @@ echo "$PRESTO_HOME/bin/launcher restart" | sudo tee -a /usr/bin/restart-presto >
 sudo chmod +x /usr/bin/restart-presto
 
 echo "apache        ALL=(ALL)       NOPASSWD: /usr/bin/restart-presto" | sudo tee -a /etc/sudoers.d/apache > /dev/null
-
-# TODO: enable TLS

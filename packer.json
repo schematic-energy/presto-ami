@@ -87,5 +87,9 @@
         "type": "file",
         "source": "update-config.sh",
         "destination": "update-config.sh"
+    },{
+        "type": "file",
+        "source": "coordinator/healthcheck.sh",
+        "destination": "healthcheck.sh"
     }]
 }

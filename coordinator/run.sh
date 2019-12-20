@@ -56,7 +56,9 @@ nohup hive --service hiveserver2 &> hiveserver2.out &
 
 sudo systemctl start httpd
 sudo cp update-config.sh /var/www/cgi-bin/update-config.sh
+sudo cp healthcheck.sh /var/www/cgi-bin/healthcheck.sh
 sudo chmod +x /var/www/cgi-bin/update-config.sh
+sudo chmod +x /var/www/cgi-bin/healthcheck.sh
 
 /var/www/cgi-bin/update-config.sh
 sudo chmod -R 0777 $PRESTO_HOME/etc
