@@ -68,6 +68,16 @@
         "destination": "core-site.xml",
         "only": ["coordinator"]
     },{
+        "type": "file",
+        "source": "coordinator/peer-server",
+        "destination": "peer-server",
+        "only": ["coordinator"]
+    },{
+        "type": "file",
+        "source": "coordinator/peer-server.service",
+        "destination": "peer-server.service",
+        "only": ["coordinator"]
+    },{
         "type": "shell",
         "environment_vars": [
             "PRESTO_DATOMIC_USER={{user `datomic_user`}}",
@@ -87,16 +97,6 @@
         "type": "file",
         "source": "coordinator/run.sh",
         "destination": "run.sh",
-        "only": ["coordinator"]
-    },{
-        "type": "file",
-        "source": "coordinator/peer-server",
-        "destination": "peer-server",
-        "only": ["coordinator"]
-    },{
-        "type": "file",
-        "source": "coordinator/peer-server.service",
-        "destination": "peer-server.service",
         "only": ["coordinator"]
     },{
         "type": "file",
