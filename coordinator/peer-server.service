@@ -1,0 +1,10 @@
+[Unit]
+Description=Datomic Peer Server
+
+[Service]
+ExecStart=/usr/bin/peer-server
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy = multi-user.target

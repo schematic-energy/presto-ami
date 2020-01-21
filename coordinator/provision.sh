@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
+export PRESTO_VERSION=328
+export PRESTO_DATOMIC_VERSION=0.9.6024
+
 sudo yum install -qy java-1.8.0-openjdk.x86_64
 sudo yum install -y httpd
 
 wget http://mirrors.gigenet.com/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
 wget http://mirrors.gigenet.com/apache/hive/hive-2.3.6/apache-hive-2.3.6-bin.tar.gz
-wget https://repo1.maven.org/maven2/io/prestosql/presto-server/323/presto-server-323.tar.gz
+wget https://repo1.maven.org/maven2/io/prestosql/presto-server/$PRESTO_VERSION/presto-server-$PRESTO_VERSION.tar.gz
 
 sudo tar -xvf /home/ec2-user/hadoop*.tar.gz -C /usr/lib
 sudo tar -xvf /home/ec2-user/apache-hive*.tar.gz -C /usr/lib
@@ -39,3 +42,16 @@ echo "$PRESTO_HOME/bin/launcher restart" | sudo tee -a /usr/bin/restart-presto >
 sudo chmod +x /usr/bin/restart-presto
 
 echo "apache        ALL=(ALL)       NOPASSWD: /usr/bin/restart-presto" | sudo tee -a /etc/sudoers.d/apache > /dev/null
+
+if [ -z "$PRESTO_DATOMIC_USER" ]
+then
+    echo "Datomic version not specified, skipping"
+else
+    wget --http-user=$PRESTO_DATOMIC_USER --http-password=$PRESTO_DATOMIC_PASSWORD https://my.datomic.com/repo/com/datomic/datomic-pro/$PRESTO_DATOMIC_VERSION/datomic-pro-$PRESTO_DATOMIC_VERSION.zip -O datomic.zip
+
+    sudo unzip ~/datomic.zip -d /usr/lib
+    echo "export DATOMIC_HOME=$(echo /usr/lib/datomic*)" | sudo tee -a /etc/profile > /dev/null
+    source /etc/profile
+    sudo cp -r $DATOMIC_HOME/presto-server/plugin/datomic $PRESTO_HOME/plugin/datomic
+    echo "systemctl restart peer-server.service" | sudo tee -a /usr/bin/restart-presto > /dev/null
+fi

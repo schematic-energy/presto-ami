@@ -29,6 +29,8 @@ Export the following environment variables:
 - `PRESTO_AMI_REGIONS` - Regions in which the AMI will be made available.
 - `PRESTO_AMI_VPC` - The AWS VPC id for Packer to use to build the AMI.
 - `PRESTO_AMI_SUBNET` - The AWS Subnet id for Packer to use to build the AMI.
+- `DATOMIC_DIST_FILE` - Path to the Datomic distribution .zip file on
+  the local filesystem.
 
 Your environment must also be configured with AWS credentials with
 permissions in the specified accounts, VPC and subnet.
