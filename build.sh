@@ -2,12 +2,12 @@
 
 set -e
 
-#if [ "$(git status --porcelain)" ]; then
-#    echo "Cannot deploy: Git directory not clean"
-#    exit 1
-#fi
+if [ "$(git status --porcelain)" ]; then
+    echo "Cannot deploy: Git directory not clean"
+    exit 1
+fi
 
-version=`echo $(git rev-list --count HEAD)-$(git rev-parse --short HEAD)`-test
+version=`echo $(git rev-list --count HEAD)-$(git rev-parse --short HEAD)`
 
 echo "Using:"
 echo "PRESTO_AMI_OWNER=$PRESTO_AMI_OWNER"

@@ -96,7 +96,7 @@
     },{
         "type": "file",
         "source": "coordinator/peer-server.service",
-        "destination": "/etc/systemd/system/peer-server.service",
+        "destination": "peer-server.service",
         "only": ["coordinator"]
     },{
         "type": "file",
