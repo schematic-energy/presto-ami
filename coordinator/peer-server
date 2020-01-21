@@ -4,7 +4,7 @@ source /etc/profile
 
 dbs=""
 
-for f in $PRESTO_HOME/etc/datomic/*.db; do
+for f in $PRESTO_HOME/etc/datomic-dbs; do
     dbs="-d $(cat $f) $dbs"
 done
 
@@ -16,6 +16,4 @@ else
         sleep 60
     done
 fi
-
-
 

@@ -21,7 +21,7 @@ sudo chgrp root $PRESTO_HOME
 
 mkdir -p ~/presto
 
-sudo mkdir $PRESTO_HOME/etc
+sudo mkdir -p $PRESTO_HOME/etc/datomic-dbs
 sudo chmod -R 0777 $PRESTO_HOME/etc
 
 echo "$PRESTO_HOME/bin/launcher restart" | sudo tee -a /usr/bin/restart-presto > /dev/null
