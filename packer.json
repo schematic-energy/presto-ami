@@ -91,7 +91,7 @@
     },{
         "type": "file",
         "source": "coordinator/peer-server",
-        "destination": "/usr/bin/peer-server",
+        "destination": "peer-server",
         "only": ["coordinator"]
     },{
         "type": "file",
