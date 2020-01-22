@@ -4,7 +4,7 @@ source /etc/profile
 
 dbs=""
 
-for f in $PRESTO_HOME/etc/datomic-dbs; do
+for f in $(find $PRESTO_HOME/etc/datomic-dbs -type f); do
     dbs="-d $(cat $f) $dbs"
 done
 
