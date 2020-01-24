@@ -45,4 +45,4 @@ else
     source /etc/profile
     sudo cp -r $DATOMIC_HOME/presto-server/plugin/datomic $PRESTO_HOME/plugin/datomic
     echo "systemctl restart peer-server.service" | sudo tee -a /usr/bin/restart-presto > /dev/null
-fifi
+fi
