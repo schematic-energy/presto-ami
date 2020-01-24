@@ -69,14 +69,12 @@
         "only": ["coordinator"]
     },{
         "type": "file",
-        "source": "coordinator/peer-server",
-        "destination": "peer-server",
-        "only": ["coordinator"]
+        "source": "peer-server",
+        "destination": "peer-server"
     },{
         "type": "file",
-        "source": "coordinator/peer-server.service",
-        "destination": "peer-server.service",
-        "only": ["coordinator"]
+        "source": "peer-server.service",
+        "destination": "peer-server.service"
     },{
         "type": "shell",
         "environment_vars": [

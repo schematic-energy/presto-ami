@@ -35,8 +35,14 @@ then
 else
     wget --http-user=$PRESTO_DATOMIC_USER --http-password=$PRESTO_DATOMIC_PASSWORD https://my.datomic.com/repo/com/datomic/datomic-pro/$PRESTO_DATOMIC_VERSION/datomic-pro-$PRESTO_DATOMIC_VERSION.zip -O datomic.zip
 
+    sudo cp /home/ec2-user/peer-server /usr/bin/peer-server
+    sudo chmod +x /usr/bin/peer-server
+
+    sudo cp /home/ec2-user/peer-server.service /etc/systemd/system/peer-server.service
+
     sudo unzip ~/datomic.zip -d /usr/lib
     echo "export DATOMIC_HOME=$(echo /usr/lib/datomic*)" | sudo tee -a /etc/profile > /dev/null
     source /etc/profile
     sudo cp -r $DATOMIC_HOME/presto-server/plugin/datomic $PRESTO_HOME/plugin/datomic
-fi
+    echo "systemctl restart peer-server.service" | sudo tee -a /usr/bin/restart-presto > /dev/null
+fifi
