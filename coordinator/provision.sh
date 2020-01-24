@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export PRESTO_VERSION=329
+export PRESTO_VERSION=322
 export PRESTO_DATOMIC_VERSION=0.9.6024
 
 sudo yum install -qy java-1.8.0-openjdk.x86_64
