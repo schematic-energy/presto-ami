@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-export PRESTO_VERSION=322
-export PRESTO_DATOMIC_VERSION=0.9.6024
+export PRESTO_VERSION=330
+export PRESTO_DATOMIC_VERSION=0.9.6045
 
 sudo yum install -qy java-1.8.0-openjdk.x86_64
 sudo yum install -y httpd
