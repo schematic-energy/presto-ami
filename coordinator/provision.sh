@@ -3,7 +3,7 @@
 export PRESTO_VERSION=330
 export PRESTO_DATOMIC_VERSION=0.9.6045
 
-sudo yum install -qy java-1.8.0-openjdk.x86_64
+sudo amazon-linux-extras install java-openjdk11
 sudo yum install -y httpd
 
 wget http://mirrors.gigenet.com/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
