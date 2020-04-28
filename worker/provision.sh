@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 export PRESTO_VERSION=332
 export PRESTO_DATOMIC_VERSION=0.9.6045
 
