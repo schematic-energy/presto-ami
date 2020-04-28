@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+source /etc/profile
+
+dbs=""
+
+for f in $(find $PRESTO_HOME/etc/datomic-dbs -type f); do
+    dbs="-d $(cat $f) $dbs"
+done
+
+if [ -n "$dbs" ]; then
+    $DATOMIC_HOME/bin/run -m datomic.peer-server -h localhost -p 8998 -a myaccess,mysecret $dbs
+else
+    echo "No databases defined, not running peer server"
+    while [ 1 ]; do
+        sleep 60
+    done
+fi
+

@@ -6,7 +6,9 @@
         "accounts": "{{env `PRESTO_AMI_ACCOUNTS`}}",
         "ami_regions": "{{env `PRESTO_AMI_REGIONS`}}",
         "vpc_id": "{{env `PRESTO_AMI_VPC`}}",
-        "subnet_id": "{{env `PRESTO_AMI_SUBNET`}}"
+        "subnet_id": "{{env `PRESTO_AMI_SUBNET`}}",
+        "datomic_user":"{{env `PRESTO_DATOMIC_USER`}}",
+        "datomic_password":"{{env `PRESTO_DATOMIC_PASSWORD`}}"
     },
     "builders": [{
         "name": "coordinator",
@@ -66,11 +68,27 @@
         "destination": "core-site.xml",
         "only": ["coordinator"]
     },{
+        "type": "file",
+        "source": "peer-server",
+        "destination": "peer-server"
+    },{
+        "type": "file",
+        "source": "peer-server.service",
+        "destination": "peer-server.service"
+    },{
         "type": "shell",
+        "environment_vars": [
+            "PRESTO_DATOMIC_USER={{user `datomic_user`}}",
+            "PRESTO_DATOMIC_PASSWORD={{user `datomic_password`}}"
+        ],
         "script": "coordinator/provision.sh",
         "only": ["coordinator"]
     },{
         "type": "shell",
+        "environment_vars": [
+            "PRESTO_DATOMIC_USER={{user `datomic_user`}}",
+            "PRESTO_DATOMIC_PASSWORD={{user `datomic_password`}}"
+        ],
         "script": "worker/provision.sh",
         "only": ["worker"]
     },{
@@ -93,3 +111,4 @@
         "destination": "healthcheck.sh"
     }]
 }
+
