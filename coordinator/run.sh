@@ -16,7 +16,7 @@ export PRESTO_CONFIG_PATH=$2
 cd `dirname $0`
 
 SYSTEM_MEMORY_KB=$(cat /proc/meminfo | grep MemTotal | grep -oe '[0-9]*')
-JVM_MEM=$((($SYSTEM_MEMORY_KB / 5) * 4))K # 80% of system memory
+JVM_MEM=$((($SYSTEM_MEMORY_KB / 5) * 3))K # 60% of system memory
 
 echo "export PRESTO_CONFIG_PATH=$PRESTO_CONFIG_PATH" | sudo tee -a /etc/profile > /dev/null
 echo "export ENV=$ENV" | sudo tee -a /etc/profile > /dev/null
