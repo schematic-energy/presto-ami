@@ -2,7 +2,7 @@
 
 set -e
 
-export PRESTO_VERSION=334
+export PRESTO_VERSION=340
 export PRESTO_DATOMIC_VERSION=0.9.6045
 
 sudo amazon-linux-extras install java-openjdk11
