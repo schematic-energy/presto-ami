@@ -8,8 +8,8 @@ export PRESTO_DATOMIC_VERSION=0.9.6045
 sudo amazon-linux-extras install java-openjdk11
 sudo yum install -y httpd
 
-wget http://mirrors.gigenet.com/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
-wget http://mirrors.gigenet.com/apache/hive/hive-2.3.7/apache-hive-2.3.7-bin.tar.gz
+wget https://mirrors.gigenet.com/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
+wget https://mirrors.gigenet.com/apache/hive/hive-2.3.7/apache-hive-2.3.7-bin.tar.gz
 wget https://repo1.maven.org/maven2/io/prestosql/presto-server/$PRESTO_VERSION/presto-server-$PRESTO_VERSION.tar.gz
 
 sudo tar -xvf /home/ec2-user/hadoop*.tar.gz -C /usr/lib
