@@ -9,22 +9,29 @@ sudo amazon-linux-extras install java-openjdk11
 sudo yum install -y httpd
 
 wget https://repo1.maven.org/maven2/io/prestosql/presto-server/$PRESTO_VERSION/presto-server-$PRESTO_VERSION.tar.gz
+wget https://downloads.alluxio.io/downloads/files/2.3.0/alluxio-2.3.0-bin.tar.gz
 
 sudo tar -xvf /home/ec2-user/presto-*.tar.gz -C /usr/lib
+sudo tar -xvf /home/ec2-user/alluxio-*.tar.gz -C /usr/lib
 
 echo "export JAVA_HOME=$(echo /usr/lib/jvm/jre)" | sudo tee -a /etc/profile > /dev/null
 echo "export PRESTO_HOME=$(echo /usr/lib/presto*)" | sudo tee -a /etc/profile > /dev/null
+echo "export ALLUXIO_HOME=$(echo /usr/lib/alluxio*)" | sudo tee -a /etc/profile > /dev/null
 echo "export PATH=$PATH:$(echo /usr/lib/apache-hive*/bin)" | sudo tee -a /etc/profile > /dev/null
 
 source /etc/profile
 
 sudo chown root $PRESTO_HOME
 sudo chgrp root $PRESTO_HOME
+sudo chown root $ALLUXIO_HOME
+sudo chgrp root $ALLUXIO_HOME
 
 mkdir -p ~/presto
 
 sudo mkdir -p $PRESTO_HOME/etc/datomic-dbs
 sudo chmod -R 0777 $PRESTO_HOME/etc
+
+sudo cp $ALLUXIO_HOME/client/*.jar $PRESTO_HOME/lib
 
 echo "$PRESTO_HOME/bin/launcher restart" | sudo tee -a /usr/bin/restart-presto > /dev/null
 sudo chmod +x /usr/bin/restart-presto
